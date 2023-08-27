@@ -828,18 +828,7 @@ public class FrmCliente extends javax.swing.JFrame {
 
     private void txtCepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyPressed
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) { 
-         Clientes obj =  new Clientes();
-         ClientesDAO dao = new ClientesDAO();
-         obj = dao.buscaCep(txtCep.getText());
-         
-         txtEndereco.setText(obj.getEndereco());
-         txtBairro.setText(obj.getBairro());
-         txtCidade.setText(obj.getCidade());
-         boxEstado.setSelectedItem(obj.getEstado());               
-         System.out.println(obj.getEstado());
-         
-     }
+    
     }//GEN-LAST:event_txtCepKeyPressed
 
     /**
