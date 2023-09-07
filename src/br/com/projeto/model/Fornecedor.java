@@ -14,7 +14,15 @@ public class Fornecedor {
   private String nome;
   private String cnpj;
   private String email;
-
+ private String telefone;
+  private String celular;
+  private String cep;
+  private String endereco;
+  private int numero;
+  private String complemento;
+  private String bairro;
+  private String cidade;
+  private String estado;
     public int getId() {
         return id;
     }
@@ -118,13 +126,8 @@ public class Fornecedor {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-  private String telefone;
-  private String celular;
-  private String cep;
-  private String endereco;
-  private int numero;
-  private String complemento;
-  private String bairro;
-  private String cidade;
-  private String estado;
+ @Override
+ public String toString(){
+     return this.getNome();
+ }
 }

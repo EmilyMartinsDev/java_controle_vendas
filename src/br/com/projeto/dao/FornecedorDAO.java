@@ -176,5 +176,41 @@ public class FornecedorDAO {
             return null;
         }
     }
-    
+     public Fornecedor listarFornecedorPorNomeConsulta(String  nome){
+        try {
+     
+            
+            String sql = "select * from tb_fornecedores where nome=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nome);
+            
+            ResultSet rs = stmt.executeQuery();
+               Fornecedor obj = new Fornecedor();
+            while(rs.next()){
+             
+                 obj.setId(rs.getInt("id"));
+                obj.setNome(rs.getString("nome"));
+                obj.setCnpj(rs.getString("cnpj"));
+                obj.setEmail(rs.getString("email"));
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setCelular(rs.getString("celular"));
+                obj.setCep(rs.getString("cep"));
+                obj.setEndereco(rs.getString("endereco"));
+                obj.setNumero(rs.getInt("numero"));
+                obj.setComplemento(rs.getString("complemento"));
+                obj.setBairro(rs.getString("bairro"));
+                obj.setCidade(rs.getString("cidade"));
+                obj.setEstado(rs.getString("estado"));
+                
+               
+            }
+             return obj;
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null,"erro ao listar"+e);
+            
+            return null;
+        }
+        
+    }
 }
