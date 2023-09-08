@@ -181,7 +181,8 @@ public class ProdutoDAO {
         }
 
     }
-      public Produto listarProdutoPorCodigoTela(int id) {
+
+    public Produto listarProdutoPorCodigoTela(int id) {
         try {
 
             String sql = "select p.id, p.descricao, p.preco, p.qtd_estoque, f.nome from tb_produtos as p inner join tb_fornecedores as f on (p.for_id = f.id) where p.id=?";
@@ -210,5 +211,48 @@ public class ProdutoDAO {
         }
 
     }
-    
+
+    public void baixaEstoque(int id, int qtdNova) {
+        try {
+            String sql = "update tb_produtos set qtd_estoque=? where id=?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, qtdNova);
+            stmt.setInt(2, id);
+
+            stmt.execute();
+            stmt.close();
+
+            //  JOptionPane.showMessageDialog(null, "atualizado com sucesso");
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "erro ao dar baixa" + err);
+        }
+    }
+
+    public int retornaqtdEstoqueAtual(int id) {
+        try {
+
+            int qtd_estoque = 0;
+
+            String sql = "select qtd_estoque from tb_produtos where id=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, id);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Produto p = new Produto();
+
+                qtd_estoque = (rs.getInt("qtd_estoque"));
+            }
+            return qtd_estoque;
+
+            //  JOptionPane.showMessageDialog(null, "atualizado com sucesso");
+        } catch (SQLException err) {
+            throw new RuntimeException(err);
+        }
+    }
+
 }

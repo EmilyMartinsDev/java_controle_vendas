@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class FrmVenda extends javax.swing.JFrame {
     double total, preco, subtotal;
     int qtd;
-    
+     Clientes obj = new Clientes();
     DefaultTableModel carrinho;
     /**
      * Creates new form FrmVenda
@@ -490,7 +490,7 @@ public class FrmVenda extends javax.swing.JFrame {
     private void btnpesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpesquisaActionPerformed
         // TODO add your handling code here:
 
-        Clientes obj = new Clientes();
+       
         ClientesDAO dao = new ClientesDAO();
 
         obj = dao.listarClientePorCPFTela(txtCPF.getText());
@@ -547,9 +547,12 @@ public class FrmVenda extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrmPagamento telap = new FrmPagamento();
         telap.txttotal.setText(String.valueOf(total));
-        
+           telap.cliente  = obj;
+           telap.carrinho = carrinho;
+           
+           
         telap.setVisible(true);
-        
+     
         this.dispose();
         
     }//GEN-LAST:event_btnpagamentoActionPerformed
