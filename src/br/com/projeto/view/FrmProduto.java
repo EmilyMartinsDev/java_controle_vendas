@@ -93,7 +93,7 @@ public class FrmProduto extends javax.swing.JFrame {
         btnEditar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -410,6 +410,7 @@ public class FrmProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaActionPerformed
@@ -421,29 +422,22 @@ public class FrmProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nome = "%"+txtPesquisa.getText()+"%";
         
-        ClientesDAO dao = new ClientesDAO();
+        ProdutoDAO dao = new ProdutoDAO();
         
-        List<Clientes> lista= dao.buscaClienteNome(nome);
+        List<Produto> lista= dao.listaProdutosTela(nome);
         
         DefaultTableModel dados = (DefaultTableModel) tableProdutos.getModel();
         
         dados.setNumRows(0);
         
-        for(Clientes c: lista){
+        for(Produto c: lista){
             dados.addRow(new Object[]{
             c.getId(),
-            c.getNome(),
-            c.getRg(),
-            c.getEmail(),
-            c.getTelefone(),
-            c.getCelular(),
-            c.getCep(),
-            c.getEndereco(),
-            c.getNumero(),
-            c.getComplemento(),
-            c.getBairro(),
-            c.getCidade(),
-            c.getEstado()
+            c.getDescricao(),
+            c.getPreco(),
+            c.getQtd_estoque(),
+            c.getFornecedor().getNome(),
+          
             });
             
         }
@@ -657,8 +651,8 @@ public class FrmProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    public javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel painelDadosPessoais;
     private javax.swing.JTable tableProdutos;
     private javax.swing.JTextField txtCodigo;

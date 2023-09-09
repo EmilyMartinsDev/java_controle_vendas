@@ -206,12 +206,30 @@ public class FuncionarioDAO {
         ResultSet rs = stmt.executeQuery();
         
            if(rs.next()){
+              if(rs.getString("nivel_acesso").equals("administrador")){
                 JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema! " );
                 FrmMenu tela = new FrmMenu();
                 
                 tela.usuarioLogado = rs.getString("nome");
                 
                 tela.setVisible(true);
+              }
+              
+              else if(rs.getString("nivel_acesso").equals("usuario")){
+                JOptionPane.showMessageDialog(null, "Seja bem vindo ao Sistema! " );
+                FrmMenu tela = new FrmMenu();
+                
+                tela.usuarioLogado = rs.getString("nome");
+                
+                tela.menu_posicao.setEnabled(false);
+                tela.menu_controlevendas.setEnabled(false);
+                tela.controlefunc.setEnabled(false);
+                tela.fornecedor.setEnabled(false);
+                
+                tela.setVisible(true);
+                  
+              }
+              
            }
         
         } catch (SQLException e) {

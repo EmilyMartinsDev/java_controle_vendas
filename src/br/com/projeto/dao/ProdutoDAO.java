@@ -254,5 +254,27 @@ public class ProdutoDAO {
             throw new RuntimeException(err);
         }
     }
+    
+    
+    
+    public void adicionarNoEstoque(int id, int qtdNova) {
+        try {
+            String sql = "update tb_produtos set qtd_estoque=? where id=?";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+
+            stmt.setInt(1, qtdNova);
+            stmt.setInt(2, id);
+
+            stmt.execute();
+            stmt.close();
+
+            //  JOptionPane.showMessageDialog(null, "atualizado com sucesso");
+        } catch (SQLException err) {
+            JOptionPane.showMessageDialog(null, "erro ao dar adicionar" + err);
+        }
+    }
+    
+    
 
 }

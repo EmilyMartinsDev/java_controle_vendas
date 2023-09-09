@@ -103,4 +103,27 @@ public class VendaDAO {
         }
     }
 
+       public double retornaValorPorData( LocalDate data) {
+
+        try {
+            double totalvenda = 0;
+
+            String sql = "select sum(total_venda) as total from tb_vendas where data_venda=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, data.toString());
+      
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+              totalvenda = rs.getDouble("total");
+            }
+
+            return totalvenda;
+
+        } catch (SQLException err) {
+            throw new RuntimeException(err);
+        }
+    }
+     
+     
 }
